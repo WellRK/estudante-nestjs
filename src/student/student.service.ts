@@ -1,20 +1,20 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { IStudent } from 'src/interface/student.interface';
-import { CreateStudentDTO } from 'src/dto/create-student.dto';
-import { UpdateStudentDTO } from 'src/dto/update-student.dto';
+import { CreateStudentDto } from 'src/dto/create-student.dto';
+import { UpdateStudentDto } from 'src/dto/update-student.dto';
+import { Model } from 'mongoose';
 
 
 @Injectable()
 export class StudentService {
-
     constructor(@InjectModel('Student') private studentModel:Model<IStudent>){    
     }
 
 
-    async createStudent(CreateStudentDTO: CreateStudentDTO):Promise<IStudent>{
+    async createStudent(CreateStudentDto: CreateStudentDto):Promise<IStudent>{
 
-        const newStudent = await new this.studentModel(CreateStudentDTO)
+        const newStudent = await new this.studentModel(CreateStudentDto)
         return newStudent.save() // salvar um alunos
     }
 
@@ -51,8 +51,8 @@ export class StudentService {
 
     //atualizar estudante por id
 
-    async updateStudent(studentId:string,updateStudentDTO: UpdateStudentDTO):Promise<IStudent>{
-        const existingStudent = await this.studentModel.findByIdAndUpdate(studentId,updateStudentDTO,{new:true})
+    async updateStudent(studentId:string,updateStudentDto: UpdateStudentDto):Promise<IStudent>{
+        const existingStudent = await this.studentModel.findByIdAndUpdate(studentId,updateStudentDto,{new:true})
 
         if(!existingStudent){
             throw new NotFoundException(`Estudante ${studentId} nao encontrado!`)

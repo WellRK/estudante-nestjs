@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
 
-export class CreateStudentDTO{
+export class CreateStudentDto{
     @IsString()
     @MaxLength(30)
     @IsNotEmpty()
