@@ -15,10 +15,10 @@ export class StudentService {
     async createStudent(CreateStudentDto: CreateStudentDto):Promise<IStudent>{
 
         const newStudent = await new this.studentModel(CreateStudentDto)
-        return newStudent.save() // salvar um alunos
+        return newStudent.save() 
     }
 
-    // ler todos os alunos
+    
 
     async getAllStudents():Promise<IStudent[]>{
         const studentData = await this.studentModel.find()
@@ -28,7 +28,7 @@ export class StudentService {
         return studentData
     }
 
-    // obter estudante por ID
+    
 
     async getStudent(studentId: string):Promise<IStudent>{
         const existingStudent = await this.studentModel.findById(studentId)
@@ -38,7 +38,7 @@ export class StudentService {
         return existingStudent  
     }
 
-    //deletar aluno por id
+    
 
 
     async deleteStudent(studentId:string):Promise<IStudent>{
@@ -49,7 +49,7 @@ export class StudentService {
         return deletedStudent   
     }
 
-    //atualizar estudante por id
+  
 
     async updateStudent(studentId:string,updateStudentDto: UpdateStudentDto):Promise<IStudent>{
         const existingStudent = await this.studentModel.findByIdAndUpdate(studentId,updateStudentDto,{new:true})
